@@ -1,4 +1,4 @@
-
+package require BWidget
 package require tooltip
 
 lappend auto_path [file dirname [info script]]

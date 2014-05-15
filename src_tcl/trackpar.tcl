@@ -2,11 +2,26 @@
 ########################################
 
 proc trackpar { } {
-set w .changetrack
+set p .changetrack
 catch {destroy $w}
-toplevel .changetrack
-wm title $w "Changing Parameters"
+catch {destroy $p}
+# Create new Window & adjustment of initial size and position
+toplevel $p
+wm title $p "Changing Parameters"
+wm geometry $p 550x550+150+150
 
+# Editet by: P.Steinhoff 24.01.2012
+# Put everything in a ScrolledWindow, bwidget1.9.4 (included in TCL 8.4.19) is required!!
+set sw [ScrolledWindow $p.sw]
+pack $p.sw -fill both -expand true
+
+set sf [ScrollableFrame $p.sw.sf]
+
+$p.sw setwidget $sf
+#
+set q [$sf getframe]
+set w $q
+#
 global tp
 
 label $w.title -text "Tracking Parameters"  -font {Helvetica 12 bold} -width 50 -anchor center

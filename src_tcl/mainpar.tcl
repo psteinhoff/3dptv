@@ -2,12 +2,30 @@
 # Changing of mainparameters
 
 proc mainpar {} {
-
-set w .changemain
+set p .changemain
 catch {destroy $w}
-toplevel .changemain
-wm title $w "Changing Parameters"
+catch {destroy $p}
+# Create new Window & adjustment of initial size and position
+toplevel $p
+wm title $p "Changing Parameters"
+wm geometry $p 550x650+150+150
 
+
+# Editet by: P.Steinhoff 24.01.2012
+# Put everything in a ScrolledWindow, bwidget1.9.4 (included in TCL 8.4.19) is required
+set sw [ScrolledWindow $p.sw]
+pack $p.sw -fill both -expand true
+
+set sf [ScrollableFrame $p.sw.sf]
+
+$p.sw setwidget $sf
+#
+set q [$sf getframe]
+set w $q
+# Panning via right mouse button: (does not work at the moment)
+#	bind .changemain <ButtonPress-3> {%W scan mark   %x %y}
+#   bind .changemain <B3-Motion>     {%W scan dragto %x %y}
+#
 global mp
 
 label $w.title -text "Main Parameters" -font {Helvetica 12 bold} -width 20 -anchor center
